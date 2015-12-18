@@ -1,0 +1,22 @@
+{
+  "name": "",
+  "version": "0.0.1",
+  "homepage": "",
+  "authors": [
+    "Gordon Freeman <eax@gmx.us>"
+  ],
+  "description": "",
+  "main": "",
+  "keywords": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "moduleType": [],
+  "license": "MIT",
+  "devDependencies": {},
+  "dependencies": {}
+}
