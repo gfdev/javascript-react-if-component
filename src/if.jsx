@@ -6,14 +6,16 @@ module.exports = React.createClass({
         if: React.PropTypes.bool.isRequired
         //children: React.PropTypes.arrayOf(
         //    React.PropTypes.oneOfType([
-        //        React.PropTypes.instanceOf(Then),
-        //        React.PropTypes.instanceOf(Else)
         //    ]))
     },
     render: function() {
-        React.Children.forEach(this.props.children, child => {
+        if (React.Children.count(this.props.children)) {
+            React.Children.forEach(this.props.children, child => {
+                console.log(child);
+            });
+        } else {
 
-        });
+        }
 
         return (
             <div></div>

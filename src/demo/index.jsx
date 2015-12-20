@@ -1,19 +1,32 @@
-var React = require('react')
-    , $ = require('jquery')
-    , _ = require('lodash')
-    , Block = require('../if')
+var Block = require('../if')
 ;
-
-var { Button, Modal, Grid, Col, Row, Nav, NavItem, NavDropdown, MenuItem, Panel, NavBrand, Navbar, CollapsibleNav, ListGroup, ListGroupItem, PageHeader, Well, Input } = require('react-bootstrap');
 
 require('./index.scss');
 
 var Index = React.createClass({
     render: function() {
         return (
-            <div></div>
+            <div>
+                <Block if={true} then='ABC' />
+
+                <Block if={true}>
+                    <b>BLOCK</b>
+                </Block>
+
+                <Block if={true}>
+                    <b>BLOCK1</b>
+                    <b>BLOCK1</b>
+                    <b>BLOCK1</b>
+                </Block>
+
+                <Block if={true}>
+                    <div>
+                        <Block if={true} then='abc' />
+                    </div>
+                </Block>
+            </div>
         );
     }
 });
 
-React.render(<Index />, document.getElementById('body'));
+ReactDOM.render(<Index />, document.getElementById('body'));

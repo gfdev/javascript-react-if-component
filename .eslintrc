@@ -13,6 +13,6 @@
   "rules": {
     "strict": [2, "global"],
     "no-unused-vars": [2, {"vars": "all", "args": "all"}],
-    "quotes": [2, "single"],
+    "quotes": [2, "single"]
   }
 }
