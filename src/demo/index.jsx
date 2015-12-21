@@ -23,7 +23,18 @@ var Index = React.createClass({
     render: function() {
         return (
             <div>
-                <Block if={true} then='ABC' else='DEF' />
+                <Block if={true}>
+                    <Block then>
+
+                    </Block>
+                    <Block else>
+
+                    </Block>
+                </Block>
+
+                <Block if={true}
+                       then='ABC'
+                       else='DEF' />
                 <Block if={false} then='ABC' else='DEF' />
                 <Block if={true} then={+123+1} else={456} />
                 <Block if={false} then={+123+1} else={456+1} />

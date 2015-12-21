@@ -9,18 +9,14 @@ module.exports = React.createClass({
         'else': React.PropTypes.oneOfType(types)
     },
     render: function() {
-        var result = null,
-            total = React.Children.count(this.props.children);
-
-        if (total) {
-            if (this.props.if) result = this.props.children;
-        } else {
-            if (this.props.if) {
-                result = this.props.then;
-            } else if (this.props.else) {
-                result = this.props.else;
-            }
-        }
+        var total = React.Children.count(this.props.children),
+            result = total && this.props.if
+                    ? this.props.children
+                : this.props.if
+                    ? this.props.then
+                : this.props.else
+                    ? this.props.else
+                : null;
 
         return result
             ? total
