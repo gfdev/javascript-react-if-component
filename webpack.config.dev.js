@@ -7,34 +7,35 @@ var path = require('path')
 module.exports = {
     context: __dirname,
     devtool: 'eval',
-    entry: {
-        main: './src/demo/index'
-    },
+    entry: [
+        'webpack-dev-server/client?http://0.0.0.0:3000',
+        'webpack/hot/only-dev-server',
+        './src/demo/index'
+    ],
     devServer: {
         contentBase: './',
         historyApiFallback: true,
         host: '0.0.0.0',
         hot: true,
-        port: 5000,
+        port: 3000,
         stats: {
             colors: true
         }
     },
     output: {
-        filename: '[name].js',
-        //publicPath: 'http://localhost:' + (5000) + '/'
+        filename: '[name].js'
     },
     resolve: {
         root: [
             path.resolve(__dirname, 'src')
         ],
         modulesDirectories: [ 'node_modules' ],
-        extensions: [ '', '.js', '.jsx' ],
-        //alias: {
-        //    react$: 'react/addons'
-        //}
+        extensions: [ '', '.js', '.jsx' ]
     },
     module: {
+        preLoaders: [
+            { test: /\.jsx?$/, include: path.resolve(__dirname, 'src'), loader: 'eslint' }
+        ],
         loaders: [
             { test: /\.jsx?$/, include: [ path.resolve(__dirname, 'src') ], loader: 'react-hot!babel' },
             { test: /\.s?css$/i, loader: 'style!css!autoprefixer?{browsers:["last 2 version"]}!sass' },
