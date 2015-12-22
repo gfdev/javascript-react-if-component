@@ -11,28 +11,35 @@ var IF = React.createClass({
     },
     render: function() {
         var total = React.Children.count(this.props.children),
-            result = null;
+            result = null,
+            blockThen, blockElse;
 
         if (total) {
             React.Children.forEach(this.props.children, child => {
-                console.log(child.type === IF);
-                console.log(child);
+                if (child.type === IF) {
+                    if (!('if' in child.props)) {
+                        if (child.props.then) blockThen = child;
+                        if (child.props.else) blockElse = child;
+                    }
+                }
             });
 
             if (this.props.if) {
-
+                result = blockThen;
+            } else {
+                result = blockElse;
             }
         }
 
-        return null;
-
-        var result = total && this.props.if
-                    ? this.props.children
-                : this.props.if
-                    ? this.props.then
-                : this.props.else
-                    ? this.props.else
-                : null;
+        //return null;
+        //
+        //var result = total && this.props.if
+        //            ? this.props.children
+        //        : this.props.if
+        //            ? this.props.then
+        //        : this.props.else
+        //            ? this.props.else
+        //        : null;
 
         return result
             ? total
