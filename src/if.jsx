@@ -1,16 +1,32 @@
 var React = require('react'),
-    types = ['func','node'].map(name => React.PropTypes[name]);
+    types = ['bool', 'func','node'].map(name => React.PropTypes[name]);
 
-module.exports = React.createClass({
+var IF = React.createClass({
     displayName: 'IF',
     propTypes: {
-        'if': React.PropTypes.bool.isRequired,
+        //'if': React.PropTypes.bool.isRequired,
+        'if': React.PropTypes.bool,
         then: React.PropTypes.oneOfType(types),
         'else': React.PropTypes.oneOfType(types)
     },
     render: function() {
         var total = React.Children.count(this.props.children),
-            result = total && this.props.if
+            result = null;
+
+        if (total) {
+            React.Children.forEach(this.props.children, child => {
+                console.log(child.type === IF);
+                console.log(child);
+            });
+
+            if (this.props.if) {
+
+            }
+        }
+
+        return null;
+
+        var result = total && this.props.if
                     ? this.props.children
                 : this.props.if
                     ? this.props.then
@@ -29,3 +45,5 @@ module.exports = React.createClass({
             : null;
     }
 });
+
+module.exports = IF;
