@@ -4,31 +4,30 @@ var React = require('react'),
 var IF = React.createClass({
     displayName: 'IF',
     propTypes: {
-        //'if': React.PropTypes.bool.isRequired,
-        'if': React.PropTypes.bool,
+        if: React.PropTypes.bool,
         then: React.PropTypes.oneOfType(types),
-        'else': React.PropTypes.oneOfType(types)
+        else: React.PropTypes.oneOfType(types)
     },
     render: function() {
         var total = React.Children.count(this.props.children),
-            result = null,
-            blockThen, blockElse;
+            result = [];
 
         if (total) {
             React.Children.forEach(this.props.children, child => {
                 if (child.type === IF) {
                     if (!('if' in child.props)) {
-                        if (child.props.then) blockThen = child;
-                        if (child.props.else) blockElse = child;
+                        if (this.props.if && child.props.then) result.push(child);
+                        if (!this.props.if && child.props.else) result.push(child);
+                    } else {
+                        result.push(child)
                     }
+                } else {
+                    if (this.props.if) result.push(child);
                 }
             });
-
-            if (this.props.if) {
-                result = blockThen;
-            } else {
-                result = blockElse;
-            }
+        } else {
+            if (this.props.if && this.props.then) result.push(this.props.then);
+            if (!this.props.if && this.props.else) result.push(this.props.else);
         }
 
         //return null;
