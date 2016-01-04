@@ -5,7 +5,7 @@
   "main": "",
   "repository": "",
   "scripts": {
-    "test": "mocha --compilers js:babel-register"
+    "test": "mocha --require babel-core/register"
   },
   "author": "Gordon Freeman <eax@gmx.us>",
   "license": "MIT",
@@ -17,7 +17,6 @@
     "babel-plugin-transform-strict-mode": "^6.3.13",
     "babel-preset-react": "^6.3.13",
     "babel-preset-stage-0": "^6.3.13",
-    "babel-register": "^6.3.13",
     "chai": "^3.4.1",
     "css-loader": "^0.23.0",
     "eslint": "^1.10.3",

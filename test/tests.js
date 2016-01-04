@@ -2,6 +2,7 @@
 
 var expect = require('chai').expect;
 var IF = require('../src/if.jsx');
+var React = require('react');
 var TestUtils = require('react-addons-test-utils');
 
 describe('Testing my div', function() {
