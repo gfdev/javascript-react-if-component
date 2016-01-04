@@ -1,5 +1,6 @@
 var React = require('react'),
-    types = ['bool', 'func','node'].map(name => React.PropTypes[name]);
+    types = ['bool', 'func', 'node'].map(name => React.PropTypes[name])
+;
 
 var IF = React.createClass({
     displayName: 'IF',
@@ -26,9 +27,16 @@ var IF = React.createClass({
                 }
             });
         } else {
-            if (this.props.if && this.props.then) result.push(this.props.then);
-            if (!this.props.if && this.props.else) result.push(this.props.else);
+            if ('if' in this.props) {
+                if (this.props.if && this.props.then) result.push(this.props.then);
+                if (!this.props.if && this.props.else) result.push(this.props.else);
+            }
         }
+
+        for (var i = 0, l = result.length; i < l; i++)
+            if (typeof result[i] === 'function') result[i] = result[i]();
+
+        if (!result.length) return null;
 
         //return null;
         //
