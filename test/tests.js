@@ -7,7 +7,7 @@ var expect = require('chai').expect
     //, TestUtils = require('react-addons-test-utils')
     , El = require('../src/if.jsx')
     , nullElement = '<noscript></noscript>'
-    , test = 'test'
+    , textTest = 'test'
 ;
 
 function check(el, eq) {
@@ -61,6 +61,6 @@ describe('React IF component testing:', function() {
         check(<El if={!!1} then={true} />, '<span></span>');
         check(<El if={!!1} then={function() { return 5 + 5; }} />, '<span>10</span>');
         check(<El if={!!1} then={function() { return 3 + 3; }()} />, '<span>6</span>');
-        check(<El if={!!1} then={function() { return test; }} />, '<span>test</span>');
+        check(<El if={!!1} then={function() { return textTest; }} />, '<span>test</span>');
     });
 });
