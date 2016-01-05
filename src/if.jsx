@@ -1,6 +1,23 @@
-var React = require('react'),
-    types = ['bool', 'func', 'node'].map(name => React.PropTypes[name])
+'use strict';
+
+var React = require('react')
+    , types = ['bool', 'func', 'node'].map(name => React.PropTypes[name])
 ;
+
+function _getResult(result) {
+    if (/^(?:string|number|boolean)$/i.test(typeof result))
+        return React.createElement('span', null, result);
+
+    if (React.isValidElement(result))
+        return result;
+
+    if (typeof result === 'function') {
+        if (typeof result.prototype.render === 'function')
+            return React.createElement(result);
+
+        return _getResult(result());
+    }
+}
 
 var IF = React.createClass({
     displayName: 'IF',
@@ -10,53 +27,36 @@ var IF = React.createClass({
         else: React.PropTypes.oneOfType(types)
     },
     render: function() {
-        var total = React.Children.count(this.props.children),
+        var props = this.props,
+            total = React.Children.count(props.children),
             result = [];
 
+        if ((props.if && !total && !props.then) || (!props.if && !total && !props.else))
+            return null;
+
         if (total) {
-            React.Children.forEach(this.props.children, child => {
+            React.Children.forEach(props.children, child => {
                 if (child.type === IF) {
                     if (!('if' in child.props)) {
-                        if (this.props.if && child.props.then) result.push(child);
-                        if (!this.props.if && child.props.else) result.push(child);
+                        if (props.if && child.props.then) result.push(child.props.children);
+                        if (!props.if && child.props.else) result.push(child.props.children);
                     } else {
                         result.push(child)
                     }
                 } else {
-                    if (this.props.if) result.push(child);
+                    if (props.if) result.push(child);
                 }
             });
         } else {
-            if ('if' in this.props) {
-                if (this.props.if && this.props.then) result.push(this.props.then);
-                if (!this.props.if && this.props.else) result.push(this.props.else);
+            if ('if' in props) {
+                if (props.if && props.then) result.push(props.then);
+                if (!props.if && props.else) result.push(props.else);
             }
         }
 
-        for (var i = 0, l = result.length; i < l; i++)
-            if (typeof result[i] === 'function') result[i] = result[i]();
-
-        if (!result.length) return null;
-
-        //return null;
-        //
-        //var result = total && this.props.if
-        //            ? this.props.children
-        //        : this.props.if
-        //            ? this.props.then
-        //        : this.props.else
-        //            ? this.props.else
-        //        : null;
-
-        return result
-            ? total
-                ? React.createElement('div', null, result)
-            : React.isValidElement(result)
-                ? result
-            : typeof result === 'function'
-                ? React.createElement(result, null)
-            : React.createElement('span', null, result)
-            : null;
+        return !result.length ? null
+            : result.length === 1 ? _getResult(result.shift())
+            : React.createElement('div', null, result);
     }
 });
 
