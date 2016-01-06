@@ -1,11 +1,11 @@
 {
-  "name": "",
+  "name": "react-if-component",
   "version": "0.0.1",
   "homepage": "",
   "authors": [
     "Gordon Freeman <eax@gmx.us>"
   ],
-  "description": "",
+  "description": "React component for conditional rendering of embedded elements or props",
   "main": "",
   "keywords": [],
   "ignore": [
