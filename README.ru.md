@@ -41,5 +41,7 @@ $ bower install --save react-if-component
 ```
 
 ## Примеры использования
+
+
 ## Лицензия
 **react-if-component** распространяется под лицензией **MIT**.

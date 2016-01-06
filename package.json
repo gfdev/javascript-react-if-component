@@ -6,7 +6,10 @@
   "keywords": [
     "React",
     "conditional",
-    "component"
+    "component",
+    "if",
+    "else",
+    "then"
   ],
   "homepage": "https://github.com/gfdev/javascript-react-if-component",
   "repository": {
@@ -41,7 +44,6 @@
     "html-webpack-plugin": "^1.7.0",
     "mocha": "^2.3.4",
     "node-sass": "^3.4.2",
-    "react": "^0.14.0",
     "react-bootstrap": "^0.28.1",
     "react-dom": "^0.14.0",
     "react-hot-loader": "^1.3.0",
@@ -50,5 +52,7 @@
     "webpack": "^1.12.9",
     "webpack-dev-server": "^1.14.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "react": "^0.14.0"
+  }
 }
