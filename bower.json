@@ -6,7 +6,7 @@
     "Gordon Freeman <eax@gmx.us> (https://github.com/gfdev)"
   ],
   "description": "React component for conditional rendering of embedded elements or props",
-  "main": "",
+  "main": "index.js",
   "keywords": [
     "React",
     "conditional",
