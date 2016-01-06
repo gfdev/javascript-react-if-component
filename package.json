@@ -1,6 +1,6 @@
 {
   "name": "react-if-comp",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "React component for conditional rendering of embedded elements or props",
   "main": "",
   "keywords": [
@@ -20,7 +20,7 @@
     "url": "https://github.com/gfdev/javascript-react-if-component/issues"
   },
   "scripts": {
-    "test": "mocha --require babel-core/register"
+    "test": "mocha --harmony --require babel-core/register"
   },
   "author": {
     "name": "Gordon Freeman",
