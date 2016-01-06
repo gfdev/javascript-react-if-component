@@ -21,7 +21,7 @@ return (
 ```
 С помощью этого компонента такие конструкции можно заменить следующим образом:
 ```javascript
-var Node = require('react-if-component');
+var Node = require('react-if-comp');
 
 return (
   <nav>
@@ -33,18 +33,18 @@ return (
 ## Установка
 * NPM
 ```shell
-$ npm install --save react-if-component
+$ npm install --save react-if-comp
 ```
 * Bower
 ```shell
-$ bower install --save react-if-component
+$ bower install --save react-if-comp
 ```
 
 ## Примеры использования
 ```javascript
 var React = require('react')
   , ReactDOM = require('react-dom')
-  , Node = require('react-if-component')
+  , Node = require('react-if-comp')
 ;
 
 var Bar = React.createClass({
@@ -68,39 +68,39 @@ var Index = React.createClass({
         return (
             <div>
               <Node if={true} then='true' />
-            
+
               <Node if={true} then='true' else='false' />
-              
+
               <Node if={false} then='true' else='false' />
-              
+
               <Node if={true} then={1+1} else={0+0} />
-              
+
               <Node if={true} then={Bar} else={Foo} />
-              
+
               <Node if={false} then={Bar} else={Foo} />
-              
+
               <Node if={true} then={<Bar one='1' two='2' />} else={<Foo one='1' two='2' />} />
-              
+
               <Node if={true}>
                 <b>true</b>
               </Node>
-              
+
               <Node if={false}>
                 <Node else><b>false</b></Node>
               </Node>
-              
+
               <Node if={true}>
                 <Node then><b>true</b></Node>
                 <Node else><b>false</b></Node>
               </Node>
-              
+
               <Node if={true}>
                 <i>begin</i>
                 <Node then><b>true</b></Node>
                 <Node else><b>false</b></Node>
                 <i>end</i>
               </Node>
-              
+
               <Node if={true}>
                 <b>true</b>
                 <Node if={true} then='true' />
@@ -114,4 +114,4 @@ ReactDOM.render(<Index />, document.getElementById('body'));
 ```
 
 ## Лицензия
-**react-if-component** распространяется под лицензией **MIT**.
+**react-if-comp** распространяется под лицензией **MIT**.

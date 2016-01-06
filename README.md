@@ -21,7 +21,7 @@ return (
 ```
 With help of **React IF component** you can replace such construction:
 ```javascript
-var Node = require('react-if-component');
+var Node = require('react-if-comp');
 
 return (
   <nav>
@@ -33,18 +33,18 @@ return (
 ## Install
 * NPM
 ```shell
-$ npm install --save react-if-component
+$ npm install --save react-if-comp
 ```
 * Bower
 ```shell
-$ bower install --save react-if-component
+$ bower install --save react-if-comp
 ```
 
 ## Usage
 ```javascript
 var React = require('react')
   , ReactDOM = require('react-dom')
-  , Node = require('react-if-component')
+  , Node = require('react-if-comp')
 ;
 
 var Bar = React.createClass({
@@ -114,4 +114,4 @@ ReactDOM.render(<Index />, document.getElementById('body'));
 ```
 
 ## License
-**react-if-component** is released under the **MIT** license.
+**react-if-comp** is released under the **MIT** license.
