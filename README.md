@@ -4,7 +4,7 @@
 > React component for conditional rendering of embedded elements or props
 
 ## Description
-In React component code you can often deal with construction like this:
+In React component code you can often deal with construction like this (example from [here](https://facebook.github.io/react/tips/if-else-in-JSX.html)):
 ```javascript
 var loginButton;
 if (loggedIn) {
@@ -20,10 +20,8 @@ return (
   </nav>
 );
 ```
-With help of **React IF component** you can replace such construction:
+With help of **React IF component** you can replace it with:
 ```javascript
-var Node = require('react-if-comp');
-
 return (
   <nav>
     <Home />
