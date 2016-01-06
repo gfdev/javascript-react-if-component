@@ -69,18 +69,22 @@ var Index = React.createClass({
         return (
             <div>
               <Node if={true} then='true' />
+              <Node if={true} then={1+1} />
+              <Node if={true} then={Bar} />
+              <Node if={true} then={<Bar prop='test' />} />
+              <Node if={true} then={function() { return 'test'; }} />
 
               <Node if={true} then='true' else='false' />
-
               <Node if={false} then='true' else='false' />
 
               <Node if={true} then={1+1} else={0+0} />
+              <Node if={false} then={1+1} else={0+0} />
 
               <Node if={true} then={Bar} else={Foo} />
-
               <Node if={false} then={Bar} else={Foo} />
 
               <Node if={true} then={<Bar one='1' two='2' />} else={<Foo one='1' two='2' />} />
+              <Node if={false} then={<Bar one='1' two='2' />} else={<Foo one='1' two='2' />} />
 
               <Node if={true}>
                 <b>true</b>
