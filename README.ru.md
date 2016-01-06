@@ -26,7 +26,7 @@ var Node = require('react-if-component');
 return (
   <nav>
     <Home />
-    <Node if={loggedIn} then={LogoutButton} else={LoginButton}>
+    <Node if={loggedIn} then={LogoutButton} else={LoginButton} />
   </nav>
 );
 ```
