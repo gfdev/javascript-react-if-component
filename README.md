@@ -1,4 +1,5 @@
 # [React](http://facebook.github.io/react/) IF component
+[![Dependency Status](https://david-dm.org/gfdev/javascript-react-if-component/status.svg)](https://david-dm.org/gfdev/javascript-react-if-component#info=dependencies) [![devDependency Status](https://david-dm.org/gfdev/javascript-react-if-component/dev-status.svg)](https://david-dm.org/gfdev/javascript-react-if-component#info=devDependencies)
 
 > React component for conditional rendering of embedded elements or props
 
