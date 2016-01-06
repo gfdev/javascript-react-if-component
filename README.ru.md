@@ -1,4 +1,5 @@
 # [React](http://facebook.github.io/react/) IF компонент
+[![Build Status](https://travis-ci.org/gfdev/javascript-react-if-component.svg?branch=master)](https://travis-ci.org/gfdev/javascript-react-if-component) [![Dependency Status](https://david-dm.org/gfdev/javascript-react-if-component/status.svg)](https://david-dm.org/gfdev/javascript-react-if-component#info=dependencies) [![devDependency Status](https://david-dm.org/gfdev/javascript-react-if-component/dev-status.svg)](https://david-dm.org/gfdev/javascript-react-if-component#info=devDependencies)
 
 > React компонент для условного отображения вложенных элементов или свойств
 
