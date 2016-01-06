@@ -1,13 +1,29 @@
 {
-  "name": "",
+  "name": "react-if-component",
   "version": "0.0.1",
-  "description": "",
+  "description": "React component for conditional rendering of embedded elements or props",
   "main": "",
-  "repository": "",
+  "keywords": [
+    "React",
+    "conditional",
+    "component"
+  ],
+  "homepage": "https://github.com/gfdev/javascript-react-if-component",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gfdev/javascript-react-if-component.git"
+  },
+  "bugs": {
+    "url": "https://github.com/gfdev/javascript-react-if-component/issues"
+  },
   "scripts": {
     "test": "mocha --require babel-core/register"
   },
-  "author": "Gordon Freeman <eax@gmx.us>",
+  "author": {
+    "name": "Gordon Freeman",
+    "email": "eax@gmx.us",
+    "url": "https://github.com/gfdev"
+  },
   "license": "MIT",
   "devDependencies": {
     "autoprefixer-loader": "^3.1.0",
