@@ -1,6 +1,6 @@
 {
   "name": "react-if-comp",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "homepage": "https://github.com/gfdev/javascript-react-if-component",
   "authors": [
     "Gordon Freeman <eax@gmx.us> (https://github.com/gfdev)"
@@ -18,6 +18,6 @@
   "license": "MIT",
   "devDependencies": {},
   "dependencies": {
-    "react": "~0.14.0"
+    "react": ">=0.12.0"
   }
 }

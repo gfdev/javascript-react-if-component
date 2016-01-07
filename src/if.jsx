@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require('react')
+    , version = +React.version.substring(0, React.version.lastIndexOf('.'))
     , types = ['bool', 'func', 'node'].map(name => React.PropTypes[name])
 ;
 
@@ -12,7 +13,7 @@ function _getResult(result) {
         return result;
 
     if (typeof result === 'function') {
-        if (typeof result.prototype.render === 'function')
+        if (result.displayName)
             return React.createElement(result);
 
         return _getResult(result());
@@ -36,8 +37,8 @@ var IF = React.createClass({
 
         if (total) {
             React.Children.forEach(props.children, child => {
-                if (child.type === IF) {
-                    if (!('if' in child.props)) {
+                if (version <= 0.12 ? child.type === IF.type : child.type === IF) {
+                    if (child.props && !('if' in child.props)) {
                         if (props.if && child.props.then) result.push(child.props.children);
                         if (!props.if && child.props.else) result.push(child.props.children);
                     } else {

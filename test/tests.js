@@ -2,7 +2,8 @@
 
 var expect = require('chai').expect
     , React = require('react')
-    , ReactDOMServer = require('react-dom/server')
+    , version = +React.version.substring(0, React.version.lastIndexOf('.'))
+    , ReactStaticMarkup = version <= 0.13 ? React : require('react-dom/server')
     , Node = require('../src/if.jsx')
     , nullElement = '<noscript></noscript>'
 ;
@@ -24,7 +25,9 @@ var Foo = React.createClass({
 });
 
 function test(el, eq) {
-    return expect(ReactDOMServer.renderToStaticMarkup(el)).equal(eq);
+    return expect(
+        ReactStaticMarkup[version <= 0.11 ? 'renderComponentToStaticMarkup' : 'renderToStaticMarkup'](el)
+    ).equal(eq);
 }
 
 describe('React IF component testing:', function() {
