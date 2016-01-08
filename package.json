@@ -1,6 +1,6 @@
 {
   "name": "react-if-comp",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "React component for conditional rendering of embedded elements or props",
   "main": "index.js",
   "keywords": [
