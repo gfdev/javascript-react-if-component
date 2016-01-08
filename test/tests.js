@@ -3,10 +3,14 @@
 var expect = require('chai').expect
     , React = require('react')
     , version = +React.version.substring(0, React.version.lastIndexOf('.'))
-    , ReactStaticMarkup = version <= 0.13 ? React : require('react-dom/server')
     , Node = require('../src/if.jsx')
-    , nullElement = '<noscript></noscript>'
 ;
+
+var Empty = React.createClass({
+    render: function() {
+        return null;
+    }
+});
 
 var Bar = React.createClass({
     render: function() {
@@ -24,78 +28,96 @@ var Foo = React.createClass({
     }
 });
 
+var render = (
+        version <= 0.13 ? React : require('react-dom/server')
+    )[
+        version <= 0.11 ? 'renderComponentToStaticMarkup' : 'renderToStaticMarkup'
+    ];
+
 function test(el, eq) {
-    return expect(
-        ReactStaticMarkup[version <= 0.11 ? 'renderComponentToStaticMarkup' : 'renderToStaticMarkup'](el)
-    ).equal(eq);
+    return expect(render(el)).equal(eq);
 }
 
 describe('React IF component testing:', function() {
     it('simple empty component', function() {
-        test(<Node />, nullElement);
-        test(<Node if={true} />, nullElement);
-        test(<Node then='1' />, nullElement);
-        test(<Node else='1' />, nullElement);
-        test(<Node Foo='1' />, nullElement);
+        test(<Node />, render(<Empty />));
+        test(<Node if={true} />, render(<Empty />));
+        test(<Node then='1' />, render(<Empty />));
+        test(<Node else='1' />, render(<Empty />));
+        test(<Node Foo='1' />, render(<Empty />));
     });
 
     it('simple else/then component', function() {
-        test(<Node if={!!1} then='Foo' />, '<span>Foo</span>');
-        test(<Node if={!!0} else='Foo'/>, '<span>Foo</span>');
-        test(<Node if={!!0} then='Foo' />, nullElement);
-        test(<Node if={!!1} else='Foo'/>, nullElement);
+        test(<Node if={!!1} then='Foo' />, render(<span>Foo</span>));
+        test(<Node if={!!0} else='Foo'/>, render(<span>Foo</span>));
+        test(<Node if={!!0} then='Foo' />, render(<Empty />));
+        test(<Node if={!!1} else='Foo'/>, render(<Empty />));
     });
 
     it('simple both else/then component', function() {
-        test(<Node if={!!1} then='Foo' else='Bar' />, '<span>Foo</span>');
-        test(<Node if={!!0} then='Foo' else='Bar'/>, '<span>Bar</span>');
+        test(<Node if={!!1} then='Foo' else='Bar' />, render(<span>Foo</span>));
+        test(<Node if={!!0} then='Foo' else='Bar'/>, render(<span>Bar</span>));
     });
 
     it('simple expression component', function() {
-        test(<Node if={!!1} then={1 + 1} />, '<span>2</span>');
-        test(<Node if={!!1} then={true} />, '<span></span>');
+        test(<Node if={!!1} then={1 + 1} />, render(<span>{1 + 1}</span>));
+        test(<Node if={!!1} then={true} />, render(<span>{true}</span>));
     });
 
     it('simple function component', function() {
-        test(<Node if={!!1} then={function() { return 5 + 5; }} />, '<span>10</span>');
-        test(<Node if={!!1} then={function() { return 3 + 3; }()} />, '<span>6</span>');
-        test(<Node if={!!1} then={function() { return Bar; }} />, '<b>Bar</b>');
-        test(<Node if={!!1} then={function() { return Foo; }()} />, '<b>Foo</b>');
+        test(<Node if={!!1} then={function() { return 5 + 5; }} />, render(<span>{(() => 5 + 5)()}</span>));
+        test(<Node if={!!1} then={function() { return 3 + 3; }()} />, render(<span>{(() => 3 + 3)()}</span>));
+        test(<Node if={!!1} then={function() { return Bar; }} />, render(<Bar />));
+        test(<Node if={!!1} then={function() { return Foo; }()} />, render(<Foo />));
     });
 
     it('simple component with tags', function() {
-        test(<Node if={!!1} then='<b>Bar</b>' />, '<span>&lt;b&gt;Bar&lt;/b&gt;</span>');
-        test(<Node if={!!1} then={<b>Bar</b>} />, '<b>Bar</b>');
+        test(<Node if={!!1} then='<b>Bar</b>' />, render(<span>&lt;b&gt;Bar&lt;/b&gt;</span>));
+        test(<Node if={!!1} then={<b>Bar</b>} />, render(<b>Bar</b>));
     });
 
     it('simple component with component', function() {
-        test(<Node if={!!1} then={<Bar />} />, '<b>Bar</b>');
-        test(<Node if={!!1} then={Bar} />, '<b>Bar</b>');
+        test(<Node if={!!1} then={<Bar />} />, render(<Bar />));
+        test(<Node if={!!1} then={Bar} />, render(<Bar />));
+    });
+
+    it('simple multiple components', function() {
+        test(<div>
+                <Node if={!!1} then='Bar' />
+                <Node if={!!1} then='Foo' />
+            </div>
+            , render(<div><span>Bar</span><span>Foo</span></div>)
+        );
+
+        test(
+            <Node if={!!1} then={[<span>Bar</span>, 'Foo', <span>Baz</span>]} />
+            , render(<div><span>Bar</span>Foo<span>Baz</span></div>)
+        );
     });
 
     it('empty component', function() {
-        test(<Node if={!!1}></Node>, nullElement);
-        test(<Node if={!!0}></Node>, nullElement);
-        test(<Node if={!!1}><Node else>Bar</Node></Node>, nullElement);
-        test(<Node if={!!0}><Node then>Bar</Node></Node>, nullElement);
+        test(<Node if={!!1}></Node>, render(<Empty />));
+        test(<Node if={!!0}></Node>, render(<Empty />));
+        test(<Node if={!!1}><Node else>Bar</Node></Node>, render(<Empty />));
+        test(<Node if={!!0}><Node then>Bar</Node></Node>, render(<Empty />));
     });
 
     it('text component', function() {
-        test(<Node if={!!1}>Foo</Node>, '<span>Foo</span>');
-        test(<Node if={!!0}>Foo</Node>, nullElement);
+        test(<Node if={!!1}>Foo</Node>, render(<span>Foo</span>));
+        test(<Node if={!!0}>Foo</Node>, render(<Empty />));
     });
 
     it('component with tags', function() {
-        test(<Node if={!!1}><b>Bar</b></Node>, '<b>Bar</b>');
-        test(<Node if={!!1}>&lt;b&gt;Bar&lt;/b&gt;</Node>, '<span>&lt;b&gt;Bar&lt;/b&gt;</span>');
+        test(<Node if={!!1}><b>Bar</b></Node>, render(<b>Bar</b>));
+        test(<Node if={!!1}>&lt;b&gt;Bar&lt;/b&gt;</Node>, render(<span>&lt;b&gt;Bar&lt;/b&gt;</span>));
     });
 
     it('component with expression', function() {
-        test(<Node if={!!1}>{3 + 3}</Node>, '<span>6</span>');
+        test(<Node if={!!1}>{3 + 3}</Node>, render(<span>{3 + 3}</span>));
     });
 
     it('component with another component', function() {
-        test(<Node if={!!1}><Bar /></Node>, '<b>Bar</b>');
+        test(<Node if={!!1}><Bar /></Node>, render(<Bar />));
     });
 
     it('component with then/esle blocks', function() {
@@ -103,27 +125,27 @@ describe('React IF component testing:', function() {
             <Node if={!!1}>
                 <Node then>Bar</Node>
             </Node>
-            , '<span>Bar</span>'
+            , render(<span>Bar</span>)
         );
         test(
             <Node if={!!0}>
                 <Node else>Foo</Node>
             </Node>
-            , '<span>Foo</span>'
+            , render(<span>Foo</span>)
         );
         test(
             <Node if={!!1}>
                 <Node then>Bar</Node>
                 <Node else>Foo</Node>
             </Node>
-            , '<span>Bar</span>'
+            , render(<span>Bar</span>)
         );
         test(
             <Node if={!!0}>
                 <Node then>Bar</Node>
                 <Node else>Foo</Node>
             </Node>
-            , '<span>Foo</span>'
+            , render(<span>Foo</span>)
         );
     });
 
@@ -132,7 +154,7 @@ describe('React IF component testing:', function() {
             <Node if={!!1}>
                 <Node then><div>Foo</div></Node>
             </Node>
-            , '<div>Foo</div>'
+            , render(<div>Foo</div>)
         );
     });
 
@@ -141,7 +163,7 @@ describe('React IF component testing:', function() {
             <Node if={!!1}>
                 <Node then><Bar /></Node>
             </Node>
-            , '<b>Bar</b>'
+            , render(<Bar />)
         );
     });
 
@@ -150,7 +172,7 @@ describe('React IF component testing:', function() {
             <Node if={!!1}>
                 <Node if={!!1} then='Bar' />
             </Node>
-            , '<span>Bar</span>'
+            , render(<span>Bar</span>)
         );
         test(
             <Node if={!!1}>
@@ -158,7 +180,7 @@ describe('React IF component testing:', function() {
                     <Node then>Bar</Node>
                 </Node>
             </Node>
-            , '<span>Bar</span>'
+            , render(<span>Bar</span>)
         );
     });
 
@@ -168,7 +190,7 @@ describe('React IF component testing:', function() {
                 <Node if={!!1} then='Bar' />
                 <Node if={!!1} then='Foo' />
             </Node>
-            , '<div><span>Bar</span><span>Foo</span></div>'
+            , render(<div><span>Bar</span><span>Foo</span></div>)
         );
         test(
             <Node if={!!1}>
@@ -179,14 +201,23 @@ describe('React IF component testing:', function() {
                     <Node else>Foo</Node>
                 </Node>
             </Node>
-            , '<div><span>Bar</span><span>Foo</span></div>'
+            , render(<div><span>Bar</span><span>Foo</span></div>)
         );
         test(
             <Node if={!!1}>
                 <Node if={!!1} then='Bar' else='Foo' />
                 <Node if={!!0} then={123+4} else={456+7} />
             </Node>
-            , '<div><span>Bar</span><span>463</span></div>'
+            , render(<div><span>Bar</span><span>463</span></div>)
+        );
+    });
+
+    it('multiple components', function() {
+        test(<div>
+                <Node if={true} then={[<span>Bar</span>, 'Foo', <span>Baz</span>]} />
+                <Node if={true} then={[<span>Bar</span>, 'Foo', <span>Baz</span>]} />
+            </div>
+            , render(<div><div><span>Bar</span>Foo<span>Baz</span></div><div><span>Bar</span>Foo<span>Baz</span></div></div>)
         );
     });
 
@@ -206,7 +237,19 @@ describe('React IF component testing:', function() {
                 <Bar />
                 <Foo a={1} b={2} />
             </Node>
-            , '<div>Bar<b>Bar</b><span>Bar</span><i>Bar</i><i>Foo</i><b>Bar</b><b>Foo</b></div>'
+            , render(<div>Bar<b>Bar</b><span>Bar</span><i>Bar</i><i>Foo</i><b>Bar</b><b>Foo</b></div>)
+        );
+        test(
+            <Node if={true}>
+                <Node if={!!1} then={[<span></span>, 'My name is Joe!', <span></span>]} />
+                Hello Joe!
+            </Node>
+            , render(<div><div><span></span>My name is Joe!<span></span></div>Hello Joe!</div>)
+        );
+
+        test(
+            <Node if={!!1} then={<div><Bar /></div>} />
+            , render(<div>{true && <Bar />}</div>)
         );
     });
 });

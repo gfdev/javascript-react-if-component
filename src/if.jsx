@@ -56,7 +56,7 @@ var IF = React.createClass({
         }
 
         return !result.length ? null
-            : result.length === 1 ? _getResult(result.shift())
+            : result.length === 1 && !(result[0] instanceof Array) ? _getResult(result.shift())
             : React.createElement('div', null, result);
     }
 });
