@@ -25,6 +25,16 @@ With help of **React IF component** you can replace it with:
 return (
   <nav>
     <Home />
+    <Node if={loggedIn}>
+      <Node then><LogoutButton /></Node>
+      <Node else><LoginButton /></Node>
+    </Node>
+  </nav>
+);
+// or
+return (
+  <nav>
+    <Home />
     <Node if={loggedIn} then={LogoutButton} else={LoginButton} />
   </nav>
 );
