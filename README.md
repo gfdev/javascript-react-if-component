@@ -35,10 +35,6 @@ return (
 ```shell
 $ npm install --save react-if-comp
 ```
-* Bower
-```shell
-$ bower install --save react-if-comp
-```
 
 ## Usage
 ```javascript
