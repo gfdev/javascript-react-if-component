@@ -266,12 +266,15 @@ describe('React IF component testing:', function() {
         test(
             <Node if={!!1} then={<div><span>Case 1</span></div>} else={<div><span>Case 2</span></div>} />
             , createRender(function() {
-                var element;
+                var element,
+                    props = this.props;
 
                 return (
                     <div>
                         {(() => {
-                            if (!this.props.myProp) {
+                            console.log(this);
+
+                            if (!props.myProp) {
                                 element = <span>Case 1</span>;
                             } else {
                                 element = <span>Case 2</span>;
@@ -287,12 +290,13 @@ describe('React IF component testing:', function() {
         test(
             <Node if={!!0} then={[<span>Case 1</span>]} else={[<span>Case 2</span>]} />
             , createRender(function() {
-                var element;
+                var element,
+                    props = this.props;
 
                 return (
                     <div>
                         {(() => {
-                            if (!this.props.myProp) {
+                            if (!props.myProp) {
                                 element = <span>Case 1</span>;
                             } else {
                                 element = <span>Case 2</span>;
