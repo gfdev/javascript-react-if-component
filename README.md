@@ -1,7 +1,7 @@
 # [React](http://facebook.github.io/react/) IF component
 [![npm version](https://badge.fury.io/js/react-if-comp.svg)](https://www.npmjs.com/package/react-if-comp) [![Build Status](https://travis-ci.org/gfdev/javascript-react-if-component.svg?branch=master)](https://travis-ci.org/gfdev/javascript-react-if-component) [![Dependency Status](https://david-dm.org/gfdev/javascript-react-if-component/status.svg)](https://david-dm.org/gfdev/javascript-react-if-component#info=dependencies) [![devDependency Status](https://david-dm.org/gfdev/javascript-react-if-component/dev-status.svg)](https://david-dm.org/gfdev/javascript-react-if-component#info=devDependencies)
 
-> React component for conditional rendering of embedded elements or props
+> React component for conditional rendering.
 
 ## Description
 In React component code you can often deal with construction like this (example from [here](https://facebook.github.io/react/tips/if-else-in-JSX.html)):
