@@ -38,6 +38,17 @@ function test(el, eq) {
     return expect(render(el)).equal(eq);
 }
 
+function createRender(func, props) {
+    return render(
+        React.createElement(
+            React.createClass({
+                render: func
+            }),
+            props
+        )
+    );
+}
+
 describe('React IF component testing:', function() {
     it('simple empty component', function() {
         test(<Node />, render(<Empty />));
@@ -241,15 +252,57 @@ describe('React IF component testing:', function() {
         );
         test(
             <Node if={true}>
-                <Node if={!!1} then={[<span></span>, 'My name is Joe!', <span></span>]} />
-                Hello Joe!
+                <Node if={!!1} then={[<span>Case 1</span>, 'Case 2', <span>Case 3</span>]} />
+                Case 4
             </Node>
-            , render(<div><div><span></span>My name is Joe!<span></span></div>Hello Joe!</div>)
+            , render(<div><div><span>Case 1</span>Case 2<span>Case 3</span></div>Case 4</div>)
         );
 
         test(
             <Node if={!!1} then={<div><Bar /></div>} />
             , render(<div>{true && <Bar />}</div>)
+        );
+
+        test(
+            <Node if={!!1} then={<div><span>Case 1</span></div>} else={<div><span>Case 2</span></div>} />
+            , createRender(function() {
+                var element;
+
+                return (
+                    <div>
+                        {(() => {
+                            if (!this.props.myProp) {
+                                element = <span>Case 1</span>;
+                            } else {
+                                element = <span>Case 2</span>;
+                            }
+                        })()}
+
+                        {element}
+                    </div>
+                );
+            }, { myProp: false })
+        );
+
+        test(
+            <Node if={!!0} then={[<span>Case 1</span>]} else={[<span>Case 2</span>]} />
+            , createRender(function() {
+                var element;
+
+                return (
+                    <div>
+                        {(() => {
+                            if (!this.props.myProp) {
+                                element = <span>Case 1</span>;
+                            } else {
+                                element = <span>Case 2</span>;
+                            }
+                        })()}
+
+                        {element}
+                    </div>
+                );
+            }, { myProp: true })
         );
     });
 });

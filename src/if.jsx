@@ -20,8 +20,8 @@ function _getResult(result) {
     }
 }
 
-var IF = React.createClass({
-    displayName: 'IF',
+var If = React.createClass({
+    displayName: 'If',
     propTypes: {
         if: React.PropTypes.bool,
         then: React.PropTypes.oneOfType(types),
@@ -37,7 +37,7 @@ var IF = React.createClass({
 
         if (total) {
             React.Children.forEach(props.children, child => {
-                if (version <= 0.12 ? child.type === IF.type : child.type === IF) {
+                if (version <= 0.12 ? child.type === If.type : child.type === If) {
                     if (child.props && !('if' in child.props)) {
                         if (props.if && child.props.then) result.push(child.props.children);
                         if (!props.if && child.props.else) result.push(child.props.children);
@@ -61,4 +61,4 @@ var IF = React.createClass({
     }
 });
 
-module.exports = IF;
+module.exports = If;
