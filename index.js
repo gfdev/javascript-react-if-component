@@ -1,1 +1,1 @@
-module.exports = require('./src/if');
+module.exports = require('./src/module');
