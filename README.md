@@ -124,4 +124,4 @@ ReactDOM.render(<Index />, document.getElementById('body'));
 ```
 
 ## License
-**react-if-comp** is released under the **MIT** license.
+**react-if-component** is released under the **MIT** license.
