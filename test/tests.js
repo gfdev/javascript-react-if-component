@@ -272,8 +272,6 @@ describe('React IF component testing:', function() {
                 return (
                     <div>
                         {(() => {
-                            console.log(this);
-
                             if (!props.myProp) {
                                 element = <span>Case 1</span>;
                             } else {
