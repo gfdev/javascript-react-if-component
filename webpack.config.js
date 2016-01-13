@@ -4,6 +4,7 @@ var pkg = require('./package.json')
 
 module.exports = {
     context: __dirname + '/src',
+    devtool: 'source-map',
     entry: '../index.js',
     output: {
         path: __dirname + '/dist',
@@ -14,20 +15,18 @@ module.exports = {
     },
     externals: {
         'react': {
-            'commonjs': 'react',
-            'commonjs2': 'react',
-            'amd': 'react',
-            'root': 'React'
+            amd: 'react',
+            root: 'React',
+            commonjs: 'react',
+            commonjs2: 'react'
         }
     },
     module: {
         loaders: [
-            { test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel?cacheDirectory' }
+            { test: /\.jsx?$/, include: __dirname, loader: 'babel?cacheDirectory' }
         ]
     },
     plugins: [
-        new webpack.optimize.UglifyJsPlugin({
-            compress: { warnings: false }
-        })
+        new webpack.optimize.UglifyJsPlugin()
     ]
 };
