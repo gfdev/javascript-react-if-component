@@ -20,7 +20,8 @@
     "url": "https://github.com/gfdev/javascript-react-if-component/issues"
   },
   "scripts": {
-    "test": "mocha --harmony --require babel-core/register"
+    "test": "mocha --harmony --require babel-core/register",
+    "build": "webpack"
   },
   "author": {
     "name": "Gordon Freeman",
