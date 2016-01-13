@@ -1,3 +1,5 @@
+'use strict';
+
 var pkg = require('./package.json')
     , webpack = require('webpack')
 ;
@@ -23,7 +25,7 @@ module.exports = {
     },
     module: {
         loaders: [
-            { test: /\.jsx?$/, include: __dirname, loader: 'babel?cacheDirectory' }
+            { test: /\.jsx$/, include: __dirname, loader: 'babel?cacheDirectory' }
         ]
     },
     plugins: [
