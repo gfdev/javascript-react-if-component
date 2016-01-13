@@ -15,8 +15,3 @@ indent_size = 2
 
 [*.json]
 indent_size = 2
-
-[*.min.*]
-indent_style = ignore
-trim_trailing_whitespace = false
-insert_final_newline = ignore

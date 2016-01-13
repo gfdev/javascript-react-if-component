@@ -31,12 +31,14 @@
   "license": "MIT",
   "devDependencies": {
     "babel-core": "^6.3.26",
+    "babel-loader": "^6.2.1",
     "babel-plugin-transform-strict-mode": "^6.3.13",
     "babel-preset-react": "^6.3.13",
     "babel-preset-stage-0": "^6.3.13",
     "chai": "^3.4.1",
     "mocha": "^2.3.4",
-    "react-dom": "^0.14.0"
+    "react-dom": "^0.14.0",
+    "webpack": "^1.12.11"
   },
   "dependencies": {
     "react": ">=0.12.0"

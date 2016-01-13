@@ -1,14 +1,14 @@
-var path = require('path')
-    , pkg = require('./package.json')
+var pkg = require('./package.json')
     , webpack = require('webpack')
 ;
 
 module.exports = {
-    entry: './index',
+    context: __dirname + '/src',
+    entry: '../index.js',
     output: {
-        filename: './dist/' + pkg.name + '.js',
-        sourceMapFilename: './dist/' + pkg.name + '.js.map',
-        //devtoolModuleFilenameTemplate: '../[resource-path]',
+        path: __dirname + '/dist',
+        filename: pkg.name + '.min.js',
+        sourceMapFilename: pkg.name + '.min.js.map',
         library: 'ReactIf',
         libraryTarget: 'umd'
     },
@@ -22,11 +22,12 @@ module.exports = {
     },
     module: {
         loaders: [
-            { test: /\.js$/, include: path.resolve(__dirname, 'src'), loader: 'babel?cacheDirectory' }
+            { test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel?cacheDirectory' }
         ]
     },
-    resolve: {
-        extensions: ['', '.js', '.jsx']
-    },
-    plugins: []
+    plugins: [
+        new webpack.optimize.UglifyJsPlugin({
+            compress: { warnings: false }
+        })
+    ]
 };
