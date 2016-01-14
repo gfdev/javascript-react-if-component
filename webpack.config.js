@@ -16,7 +16,7 @@ module.exports = {
         libraryTarget: 'umd'
     },
     externals: {
-        'react': {
+        react: {
             amd: 'react',
             root: 'React',
             commonjs: 'react',
