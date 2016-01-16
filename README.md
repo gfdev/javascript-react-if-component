@@ -47,6 +47,8 @@ $ npm install --save react-if-comp
 ```
 
 ## Usage
+Simple example of **react-if-component** usage you can find here https://jsfiddle.net/gfdev/s2hahzru/
+
 ```javascript
 var React = require('react')
   , ReactDOM = require('react-dom')
