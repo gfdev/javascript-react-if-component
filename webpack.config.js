@@ -12,8 +12,8 @@ module.exports = {
         path: __dirname + '/dist',
         filename: pkg.name + '.min.js',
         sourceMapFilename: pkg.name + '.min.js.map',
-        library: 'ReactIf',
-        libraryTarget: 'umd'
+        library: pkg._lib,
+        libraryTarget: pkg._libTarget
     },
     externals: {
         react: {
