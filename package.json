@@ -4,10 +4,10 @@
   "description": "React component for conditional rendering.",
   "main": "index.js",
   "keywords": [
-    "React",
+    "react",
+    "react-component",
     "conditional",
     "component",
-    "react-component",
     "if",
     "else",
     "then"
