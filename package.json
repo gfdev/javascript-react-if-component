@@ -1,6 +1,6 @@
 {
   "name": "react-if-comp",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "React component for conditional rendering.",
   "main": "index.js",
   "keywords": [
