@@ -1,1 +1,1 @@
-module.exports = require('./src/module.jsx');
+module.exports = require('./src/module.js');

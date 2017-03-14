@@ -7,11 +7,8 @@ indent_style = space
 trim_trailing_whitespace = true
 charset = utf-8
 
-[**.{js,jsx,html}]
+[**.{js,jsx,html,pl,go}]
 indent_size = 4
 
-[**.{css,scss,sass}]
-indent_size = 2
-
-[*.json]
+[**.{json,yml}]
 indent_size = 2

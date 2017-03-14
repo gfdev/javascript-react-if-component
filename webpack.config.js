@@ -25,7 +25,7 @@ module.exports = {
     },
     module: {
         loaders: [
-            { test: /\.jsx$/, include: __dirname, loader: 'babel?cacheDirectory' }
+            { test: /\.js$/, include: __dirname, loader: 'babel?cacheDirectory' }
         ]
     },
     plugins: [
