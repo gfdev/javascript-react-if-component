@@ -2,7 +2,7 @@
   "name": "react-if-comp",
   "version": "0.0.9",
   "description": "React component for conditional rendering.",
-  "main": "index.js",
+  "main": "dist/react-if-comp.min.js",
   "keywords": [
     "react",
     "react-dom",
